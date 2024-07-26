@@ -1352,12 +1352,19 @@ class ArtifactManifest(google.protobuf.message.Message):
     STORAGE_POLICY_FIELD_NUMBER: builtins.int
     STORAGE_POLICY_CONFIG_FIELD_NUMBER: builtins.int
     CONTENTS_FIELD_NUMBER: builtins.int
+    MANIFEST_FILE_PATH_FIELD_NUMBER: builtins.int
     version: builtins.int
     storage_policy: builtins.str
+    manifest_file_path: builtins.str
+    """`manifest_file_path` is used for manifests that approach the 2GiB message limit.
+    It should point to a gzipped, line-delimited JSON file containing manifest entries.
+    """
     @property
     def storage_policy_config(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StoragePolicyConfigItem]: ...
     @property
-    def contents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ArtifactManifestEntry]: ...
+    def contents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ArtifactManifestEntry]:
+        """Only one of {contents, manifest_file_path} should be set."""
+
     def __init__(
         self,
         *,
@@ -1365,8 +1372,9 @@ class ArtifactManifest(google.protobuf.message.Message):
         storage_policy: builtins.str = ...,
         storage_policy_config: collections.abc.Iterable[global___StoragePolicyConfigItem] | None = ...,
         contents: collections.abc.Iterable[global___ArtifactManifestEntry] | None = ...,
+        manifest_file_path: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["contents", b"contents", "storage_policy", b"storage_policy", "storage_policy_config", b"storage_policy_config", "version", b"version"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["contents", b"contents", "manifest_file_path", b"manifest_file_path", "storage_policy", b"storage_policy", "storage_policy_config", b"storage_policy_config", "version", b"version"]) -> None: ...
 
 global___ArtifactManifest = ArtifactManifest
 
@@ -4041,6 +4049,8 @@ class JobInputRequest(google.protobuf.message.Message):
     INPUT_SOURCE_FIELD_NUMBER: builtins.int
     INCLUDE_PATHS_FIELD_NUMBER: builtins.int
     EXCLUDE_PATHS_FIELD_NUMBER: builtins.int
+    INPUT_SCHEMA_FIELD_NUMBER: builtins.int
+    input_schema: builtins.str
     @property
     def input_source(self) -> global___JobInputSource: ...
     @property
@@ -4053,8 +4063,9 @@ class JobInputRequest(google.protobuf.message.Message):
         input_source: global___JobInputSource | None = ...,
         include_paths: collections.abc.Iterable[global___JobInputPath] | None = ...,
         exclude_paths: collections.abc.Iterable[global___JobInputPath] | None = ...,
+        input_schema: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["input_source", b"input_source"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["exclude_paths", b"exclude_paths", "include_paths", b"include_paths", "input_source", b"input_source"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["exclude_paths", b"exclude_paths", "include_paths", b"include_paths", "input_schema", b"input_schema", "input_source", b"input_source"]) -> None: ...
 
 global___JobInputRequest = JobInputRequest
